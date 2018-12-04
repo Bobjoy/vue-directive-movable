@@ -97,7 +97,7 @@
         }
 
         // 右边界无右移
-        if ((index + 1) % offset  === 0) {
+        if ((index + 1) % offset  === 0 || index === opts.list.length-1) {
             $right.addClass('useless');
         }
 

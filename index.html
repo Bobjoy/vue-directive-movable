@@ -8,9 +8,6 @@
 		#app {
 			margin: 50px;
 		}
-		h2 {
-			text-align: center;
-		}
 		hr {
 			margin: 20px 0;
 		}
@@ -24,7 +21,6 @@
 			min-height: 30px;
 			line-height: 30px;
 			position: relative;
-			margin: 0 auto;
 		}
 		.td {
 			border-left: 1px solid #CCC;
@@ -76,6 +72,27 @@
 					<div class="td">{{list[i+2].label}}</div>
 					<div class="td">{{list[i+2].content}}</div>
 				</div>
+			</div>
+		</div>
+		<h2>四列</h2>
+		<div>
+			<div v-for="(item,i) in list" :key="i" class="tr" v-if="i%4==0" style="width:1055px">
+				<div style="display:inline-block" v-jr-movable="{list: list, index: i, callback: onMove, col: 4}">
+					<div class="td">{{item.label}}</div>
+					<div class="td">{{item.content}}</div>
+				</div>
+				<div v-if="list[i+1]" style="display:inline-block" v-jr-movable="{list: list, index: i+1, callback: onMove, col: 4}">
+					<div class="td">{{list[i+1].label}}</div>
+					<div class="td">{{list[i+1].content}}</div>
+				</div>
+				<div v-if="list[i+2]" style="display:inline-block" v-jr-movable="{list: list, index: i+2, callback: onMove, col: 4}">
+					<div class="td">{{list[i+2].label}}</div>
+					<div class="td">{{list[i+2].content}}</div>
+				</div>
+				<div v-if="list[i+3]" style="display:inline-block" v-jr-movable="{list: list, index: i+3, callback: onMove, col: 4}">
+						<div class="td">{{list[i+3].label}}</div>
+						<div class="td">{{list[i+3].content}}</div>
+					</div>
 			</div>
 		</div>
 	</div>
