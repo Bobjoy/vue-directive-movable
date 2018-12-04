@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Vue可移动DOM指令</title>
+	<style>
+		#app {
+			margin: 50px;
+		}
+		h2 {
+			text-align: center;
+		}
+		hr {
+			margin: 20px 0;
+		}
+
+		[v-cloak] {
+			display: none
+		}
+
+		.tr {
+			border: 1px solid #CCC;
+			min-height: 30px;
+			line-height: 30px;
+			position: relative;
+			margin: 0 auto;
+		}
+		.td {
+			border-left: 1px solid #CCC;
+			display: inline-block;
+			width: 120px;
+			text-align: center;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="app" v-cloak>
+		<h2>一列</h2>
+		<div>
+			<div v-for="(item,i) in list" :key="i" class="tr" style="width:250px">
+				<div v-jr-movable="{list: list, index: i, callback: onMove, col: 1}">
+					<div class="td">{{item.label}}</div>
+					<div class="td">{{item.content}}</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<h2>两列</h2>
+		<div>
+			<div v-for="(item,i) in list" :key="i" class="tr" v-if="i%2==0" style="width:500px">
+				<div style="display:inline-block" v-jr-movable="{list: list, index: i, callback: onMove, col: 2}">
+					<div class="td">{{item.label}}</div>
+					<div class="td">{{item.content}}</div>
+				</div>
+				<div v-if="list[i+1]" style="display:inline-block" v-jr-movable="{list: list, index: i+1, callback: onMove, col: 2}">
+					<div class="td">{{list[i+1].label}}</div>
+					<div class="td">{{list[i+1].content}}</div>
+				</div>
+			</div>
+		</div>
+		<h2>三列</h2>
+		<div>
+			<div v-for="(item,i) in list" :key="i" class="tr" v-if="i%3==0" style="width:755px">
+				<div style="display:inline-block" v-jr-movable="{list: list, index: i, callback: onMove, col: 3}">
+					<div class="td">{{item.label}}</div>
+					<div class="td">{{item.content}}</div>
+				</div>
+				<div v-if="list[i+1]" style="display:inline-block" v-jr-movable="{list: list, index: i+1, callback: onMove, col: 3}">
+					<div class="td">{{list[i+1].label}}</div>
+					<div class="td">{{list[i+1].content}}</div>
+				</div>
+				<div v-if="list[i+2]" style="display:inline-block" v-jr-movable="{list: list, index: i+2, callback: onMove, col: 3}">
+					<div class="td">{{list[i+2].label}}</div>
+					<div class="td">{{list[i+2].content}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://unpkg.com/jquery"></script>
+	<script src="https://unpkg.com/vue"></script>
+	<script src="./vue-movable.js"></script>
+	<script>
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				list: [{
+						label: '测试1',
+						content: '测试内容1'
+					},
+					{
+						label: '测试2',
+						content: '测试内容2'
+					},
+					{
+						label: '测试3',
+						content: '测试内容3'
+					},
+					{
+						label: '测试4',
+						content: '测试内容4'
+					},
+					{
+						label: '测试5',
+						content: '测试内容5'
+					},
+					{
+						label: '测试6',
+						content: '测试内容6'
+					},
+					{
+						label: '测试7',
+						content: '测试内容7'
+					},
+					{
+						label: '测试8',
+						content: '测试内容8'
+					},
+					{
+						label: '测试9',
+						content: '测试内容9'
+					},
+					{
+						label: '测试10',
+						content: '测试内容10'
+					},
+					{
+						label: '测试11',
+						content: '测试内容11'
+					}
+				]
+			},
+			methods: {
+				onMove: function () {
+					console.log(JSON.stringify(arguments))
+				}
+			}
+		})
+	</script>
+</body>
+
+</html>
